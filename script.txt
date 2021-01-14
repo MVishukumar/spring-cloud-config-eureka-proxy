@@ -1,0 +1,1 @@
+http POST localhost:9082/users/register < newUser.json

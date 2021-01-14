@@ -1,0 +1,20 @@
+server:
+  port: 9081
+
+spring:
+  application:
+    name: fraud-verifier
+  cloud:
+    loadbalancer:
+      ribbon:
+        enabled: false
+logging:
+  level:
+    org.springframework: info
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+          - metrics
+          - prometheus

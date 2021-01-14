@@ -1,0 +1,35 @@
+server:
+  port: 9083
+spring:
+  application:
+    name: proxy
+  cloud:
+    gateway:
+      routes:
+        - id: fraud
+          uri: lb://fraud-verifier
+          predicates:
+            - Path=/fraud-verifier/**
+          filters:
+            - StripPrefix=1
+            - name: Retry
+              args:
+                retries: 3
+    loadbalancer:
+      ribbon:
+        enabled: false
+eureka:
+  client:
+    healthcheck:
+      enabled: true
+logging:
+  level:
+    org.springframework: debug
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+          - metrics
+          - prometheus
